@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}About - JobShield{% endblock %}
+
+{% block content %}
+<section class="page-head">
+  <div class="container">
+    <h1>About JobShield</h1>
+    <p class="muted">A student-built tool that explains why a job posting looks risky.</p>
+  </div>
+</section>
+
+<section class="container section-tight">
+  <div class="two-col">
+    <div class="card">
+      <h2>How the detection works</h2>
+      <ol class="steps-list">
+        <li><strong>Text cleaning.</strong> The posting is lowercased and simplified.</li>
+        <li><strong>TF-IDF.</strong> Words and word pairs are turned into numbers based on how distinctive they are.</li>
+        <li><strong>Logistic Regression.</strong> A classifier trained on labelled real and fake postings gives a probability.</li>
+        <li><strong>Rule engine.</strong> Pattern rules look for fees, ID requests, chat-app contact and similar tricks.</li>
+        <li><strong>Hybrid score.</strong> The two scores are combined. A very serious rule can raise the final risk by itself.</li>
+        <li><strong>Explanation.</strong> We show which flags and words influenced the result.</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h2>Tech stack</h2>
+      <div class="chips">
+        <span class="chip neutral">Python</span><span class="chip neutral">scikit-learn</span>
+        <span class="chip neutral">pandas</span><span class="chip neutral">Flask</span>
+        <span class="chip neutral">SQLite</span><span class="chip neutral">HTML / CSS / JavaScript</span>
+      </div>
+      <h2 class="mt">Limits you should know</h2>
+      <ul class="plain-list">
+        <li>The model learns from example postings, so new scam styles can slip through.</li>
+        <li>A "Looks safe" result is not a guarantee. Always verify the employer.</li>
+        <li>It works best on English postings.</li>
+        <li>It never replaces your own judgement. If anything feels off, stop.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Your history - JobShield{% endblock %}
+
+{% block content %}
+<section class="page-head">
+  <div class="container">
+    <h1>Your history</h1>
+    <p class="muted">Your last checks on this browser. Only you can see them.</p>
+  </div>
+</section>
+
+<section class="container section-tight">
+  {% if rows %}
+  <div class="card">
+    <div class="card-head">
+      <h2>{{ rows|length }} recent check{{ '' if rows|length == 1 else 's' }}</h2>
+      <form method="post" action="{{ url_for('history_clear') }}" onsubmit="return confirm('Delete all your history?');">
+        <button type="submit" class="btn btn-ghost btn-sm">Clear history</button>
+      </form>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Date</th><th>Job title</th><th>Snippet</th><th>Risk</th><th>Verdict</th></tr>
+        </thead>
+        <tbody>
+          {% for r in rows %}
+          <tr>
+            <td data-label="Date" class="nowrap">{{ r.created_at[:16] }} UTC</td>
+            <td data-label="Job title"><strong>{{ r.title }}</strong></td>
+            <td data-label="Snippet" class="muted">{{ r.snippet }}{% if r.snippet|length >= 120 %}...{% endif %}</td>
+            <td data-label="Risk"><strong>{{ r.risk_percent }}%</strong></td>
+            <td data-label="Verdict"><span class="badge {{ r.level }}">{{ r.verdict }}</span></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% else %}
+  <div class="card empty-state">
+    <h2>No checks yet</h2>
+    <p class="muted">When you analyze a posting it will show up here.</p>
+    <a class="btn btn-primary" href="{{ url_for('analyze_page') }}">Check a job</a>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

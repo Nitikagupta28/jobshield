@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}Community reports - JobShield{% endblock %}
+
+{% block content %}
+<section class="page-head">
+  <div class="container">
+    <h1>Community scam reports</h1>
+    <p class="muted">Check a number, email or website, or warn others about one you caught.</p>
+  </div>
+</section>
+
+<section class="container section-tight">
+  <div class="stats">
+    <div class="card stat"><div class="stat-num">{{ stats.total }}</div><div class="muted">Total reports</div></div>
+    <div class="card stat"><div class="stat-num">{{ stats.unique }}</div><div class="muted">Different contacts</div></div>
+    <div class="card stat"><div class="stat-num">{{ stats.week }}</div><div class="muted">Reports this week</div></div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <h2>Check a contact</h2>
+      <form id="check-form" novalidate>
+        <label for="check-q">Phone number, email or website
+          <input id="check-q" type="text" maxlength="120" placeholder="e.g. 98765 43210 or hr@some-jobs.com">
+        </label>
+        <button type="submit" class="btn btn-primary">Check</button>
+      </form>
+      <div id="check-result" class="check-result" aria-live="polite" hidden></div>
+    </div>
+
+    <div class="card">
+      <h2>Report a scam contact</h2>
+      <form id="report-form" novalidate>
+        <label for="report-q">Phone number, email or website
+          <input id="report-q" type="text" maxlength="120" placeholder="The contact the scammer used">
+        </label>
+        <label for="report-cat">What happened?
+          <select id="report-cat">
+            {% for key, label in categories.items() %}<option value="{{ key }}">{{ label }}</option>{% endfor %}
+          </select>
+        </label>
+        <button type="submit" class="btn btn-primary">Report</button>
+      </form>
+      <p id="report-msg" class="hint" role="status"></p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Most reported contacts</h2>
+    {% if top %}
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Type</th><th>Contact</th><th>Reports</th><th>Last reported</th></tr></thead>
+        <tbody>
+          {% for r in top %}
+          <tr>
+            <td data-label="Type">{{ {'phone': 'Phone', 'email': 'Email', 'domain': 'Website'}[r.kind] }}</td>
+            <td data-label="Contact"><strong>{{ r.shown }}</strong></td>
+            <td data-label="Reports"><span class="badge danger">{{ r.n }}</span></td>
+            <td data-label="Last reported" class="muted">{{ r.day }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p class="muted">Nothing here yet. A contact appears in this list only after at least 2 separate reports.</p>
+    {% endif %}
+    <p class="hint">Numbers and emails are partly hidden here. Use the check box above with the full value to look one up.</p>
+  </div>
+
+  <div class="card safeguards">
+    <h2>How we keep it fair</h2>
+    <ul class="plain-list">
+      <li>Each browser can report the same contact only once.</li>
+      <li>One report never marks anything High risk. It takes 3 separate reports.</li>
+      <li>Big sites and free email providers (like linkedin.com or gmail.com) cannot be reported.</li>
+      <li>Reports are anonymous. We store only the contact, the reason and the date.</li>
+      <li>This is community opinion, not proof. Always verify an employer yourself.</li>
+    </ul>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='community.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <span class="pill">Free &middot; No sign-up needed</span>
+      <h1>Don't fall for a <span class="grad">fake job</span> offer.</h1>
+      <p class="lead">Paste any job or internship posting. JobShield scans it with machine learning and scam-pattern rules, then shows exactly why it looks risky or safe.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary btn-lg" href="{{ url_for('analyze_page') }}">Check a job now</a>
+        <a class="btn btn-ghost btn-lg" href="{{ url_for('guide_page') }}">Learn the warning signs</a>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="card demo">
+        <div class="demo-label">Example report</div>
+        <div class="gauge-wrap">
+          <div class="gauge" style="--p:94; --c: var(--danger)"><span>94%</span></div>
+          <div>
+            <div class="verdict danger">High risk</div>
+            <div class="sub">Work From Home Data Entry</div>
+          </div>
+        </div>
+        <ul class="flags">
+          <li><div class="fname">Asks for money</div><div class="fmatch">Matched: "registration fee"</div></li>
+          <li><div class="fname">Chat-app only contact</div><div class="fmatch">Matched: "whatsapp"</div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">How it works</h2>
+    <p class="section-sub">Three steps, about ten seconds.</p>
+    <div class="grid-3">
+      <div class="card step">
+        <div class="num">1</div>
+        <h3>Paste the posting</h3>
+        <p>Copy the job description from LinkedIn, Naukri, WhatsApp or an email and paste it in.</p>
+      </div>
+      <div class="card step">
+        <div class="num">2</div>
+        <h3>We analyse it</h3>
+        <p>A trained text model and a set of scam rules each score the posting, then the scores are combined.</p>
+      </div>
+      <div class="card step">
+        <div class="num">3</div>
+        <h3>See the reasons</h3>
+        <p>You get a risk score, the red flags found, and the words that raised suspicion, plus what to do next.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="container">
+    <h2 class="section-title">Built to be understandable</h2>
+    <p class="section-sub">No black box. Every result comes with reasons.</p>
+    <div class="grid-4">
+      <div class="card feature"><h3>Hybrid detection</h3><p>Machine learning finds patterns in language. Rules catch known tricks like fees and ID requests.</p></div>
+      <div class="card feature"><h3>Explainable</h3><p>See the exact phrases and words that pushed the score up.</p></div>
+      <div class="card feature"><h3>Your own history</h3><p>Past checks are kept for your browser only, and you can clear them any time.</p></div>
+      <div class="card feature"><h3>Works on mobile</h3><p>Most students check offers on their phone, so the whole site is built for small screens.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-band">
+      <div>
+        <h2>Got an offer that feels too good to be true?</h2>
+        <p>Check it before you share documents or pay anything.</p>
+      </div>
+      <a class="btn btn-light btn-lg" href="{{ url_for('analyze_page') }}">Check a job</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

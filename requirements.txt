@@ -1,0 +1,7 @@
+flask
+scikit-learn==1.9.1
+pandas
+joblib
+numpy
+pytest
+gunicorn

@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}Check a job - JobShield{% endblock %}
+
+{% block content %}
+<section class="page-head">
+  <div class="container">
+    <h1>Check a job posting</h1>
+    <p class="muted">Paste the details below. Only the description is required.</p>
+  </div>
+</section>
+
+<section class="container layout">
+  <div class="card">
+    <h2>Job details</h2>
+    <form id="form" novalidate>
+      <label for="title">Job title
+        <input id="title" type="text" maxlength="150" placeholder="e.g. Work From Home Data Entry">
+      </label>
+      <label for="company">Company info (optional)
+        <textarea id="company" rows="2" placeholder="About the company, contact email, etc."></textarea>
+      </label>
+      <label for="description">Job description <span class="req">*</span>
+        <textarea id="description" rows="7" placeholder="Paste the full job description here"></textarea>
+      </label>
+      <label for="requirements">Requirements (optional)
+        <textarea id="requirements" rows="2"></textarea>
+      </label>
+      <label for="benefits">Benefits (optional)
+        <textarea id="benefits" rows="2"></textarea>
+      </label>
+      <div class="actions">
+        <button type="submit" id="go" class="btn btn-primary">Analyze posting</button>
+        <button type="button" class="btn btn-ghost" id="ex-fake">Load sample scam</button>
+        <button type="button" class="btn btn-ghost" id="ex-real">Load sample genuine job</button>
+      </div>
+      <p id="error" class="error" role="alert"></p>
+      <p class="hint">Privacy: only the job title and a short snippet are saved, in your own History. You can clear it any time.</p>
+    </form>
+  </div>
+
+  <div class="card" id="result-card" aria-live="polite">
+    <div class="card-head">
+      <h2>Risk report</h2>
+      <button type="button" class="btn btn-ghost btn-sm" id="copy" hidden>Copy report</button>
+    </div>
+
+    <div id="empty" class="empty">
+      <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+      <p>Your report will appear here.</p>
+    </div>
+
+    <div id="loading" class="loading" hidden>
+      <div class="spinner"></div>
+      <p>Analyzing the posting...</p>
+    </div>
+
+    <div id="result" hidden>
+      <div class="gauge-wrap">
+        <div class="gauge" id="gauge"><span id="pct">0%</span></div>
+        <div>
+          <div id="verdict" class="verdict"></div>
+          <div class="sub">Hybrid score: ML model + rule engine</div>
+          <div class="sub" id="breakdown"></div>
+        </div>
+      </div>
+
+      <div id="next" class="next"></div>
+
+      <h3>Red flags found</h3>
+      <ul id="flags" class="flags"></ul>
+
+      <h3>Words that raised suspicion</h3>
+      <div id="words" class="chips"></div>
+      
+      <h3>Contact details found</h3>
+      <ul id="entities" class="entities"></ul>
+      <div id="report-box" class="report-box" hidden>
+        <select id="category" aria-label="Why are you reporting these contacts?">
+          {% for key, label in categories.items() %}<option value="{{ key }}">{{ label }}</option>{% endfor %}
+        </select>
+        <button type="button" class="btn btn-ghost btn-sm" id="report">Report these contacts</button>
+        <span id="report-msg" class="hint" role="status"></span>
+      </div>
+
+      <div class="actions draft-actions">
+        <button type="button" class="btn btn-primary btn-sm" id="draft" hidden>Write complaint draft</button>
+      </div>
+      <div id="complaint" hidden>
+        <h3>Complaint draft</h3>
+        <textarea id="complaint-text" rows="16" aria-label="Complaint draft"></textarea>
+        <div class="actions">
+          <button type="button" class="btn btn-ghost btn-sm" id="copy-draft">Copy draft</button>
+          <a class="btn btn-ghost btn-sm" href="https://cybercrime.gov.in" target="_blank" rel="noopener">Open cybercrime.gov.in</a>
+        </div>
+        <p class="hint">Fill in the [BRACKETS] before using it. If you lost money, call 1930 right away. This draft does not file anything, it helps you write the incident description on the portal.</p>
+      </div>
+
+      <p class="note">This tool gives guidance, not a guarantee. Verify the company on its official website and never pay for a job.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='analyze.js') }}"></script>
+{% endblock %}

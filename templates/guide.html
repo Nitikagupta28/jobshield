@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Scam guide - JobShield{% endblock %}
+
+{% block content %}
+<section class="page-head">
+  <div class="container">
+    <h1>Fake job scam guide</h1>
+    <p class="muted">How to spot a scam, how to verify an offer, and what to do if you have been targeted.</p>
+  </div>
+</section>
+
+<section class="container section-tight">
+  <h2 class="section-title left">8 warning signs</h2>
+  <div class="grid-4 tight">
+    <div class="card feature"><h3>1. They ask for money</h3><p>Registration, training, kit or "refundable" deposit. Real employers never charge you to hire you.</p></div>
+    <div class="card feature"><h3>2. Documents too early</h3><p>Aadhaar, PAN, bank or card details before any official offer letter is a big red flag.</p></div>
+    <div class="card feature"><h3>3. Free email address</h3><p>Hiring emails from gmail.com or yahoo.com instead of a company domain.</p></div>
+    <div class="card feature"><h3>4. Only WhatsApp or Telegram</h3><p>No official email, no video call, no company portal.</p></div>
+    <div class="card feature"><h3>5. Unreal salary</h3><p>Big guaranteed earnings for simple work or a couple of hours a day.</p></div>
+    <div class="card feature"><h3>6. No interview</h3><p>"Direct joining", "no experience needed", "anyone can apply".</p></div>
+    <div class="card feature"><h3>7. Pressure</h3><p>"Limited seats", "apply immediately", lots of exclamation marks.</p></div>
+    <div class="card feature"><h3>8. Vague company</h3><p>No website, no address, no real people on LinkedIn, copy-pasted job text.</p></div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <h2>How to verify an offer</h2>
+      <ol class="steps-list">
+        <li>Search the company name plus the word "scam" or "reviews".</li>
+        <li>Open the company's official website yourself. Do not use links from the message.</li>
+        <li>Find the same job on the company's careers page.</li>
+        <li>Check that the recruiter's email uses the company domain.</li>
+        <li>Look up the recruiter on LinkedIn and see if they really work there.</li>
+        <li>Ask for a video or in-person interview. Genuine firms agree.</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h2>If you think you were scammed</h2>
+      <ol class="steps-list">
+        <li>Stop all contact and do not send more money or documents.</li>
+        <li>Save screenshots, chats, payment receipts and phone numbers.</li>
+        <li>Tell your bank at once if you paid or shared banking details.</li>
+        <li>In India, report on the National Cyber Crime Reporting Portal (cybercrime.gov.in) or call the helpline 1930.</li>
+        <li>Report the posting on the platform where you found it.</li>
+        <li>Warn friends and your college placement cell.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="cta-band">
+    <div>
+      <h2>Have an offer in front of you?</h2>
+      <p>Run it through JobShield in a few seconds.</p>
+    </div>
+    <a class="btn btn-light btn-lg" href="{{ url_for('analyze_page') }}">Check a job</a>
+  </div>
+</section>
+{% endblock %}
